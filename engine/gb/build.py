@@ -368,7 +368,9 @@ def app(package, work, demo, team, emit, provisioning=True, unsigned=False, devi
     dd = os.path.join(work, "dd")
     dest = f"platform=visionOS,id={device}" if device else "generic/platform=visionOS"
     cmd = ["xcodebuild", "-project", "KleptonAlyx.xcodeproj", "-scheme", "KleptonAlyx", "-configuration", "Release",
-           "-destination", dest, "-derivedDataPath", dd]
+           "-destination", dest, "-derivedDataPath", dd,
+           # the products where `built` expects them, even when Xcode's settings use a custom build location
+           "SYMROOT=" + os.path.join(dd, "Build", "Products"), "OBJROOT=" + os.path.join(dd, "Build", "Intermediates.noindex")]
     if unsigned:
         cmd += ["CODE_SIGNING_ALLOWED=NO", "CODE_SIGNING_REQUIRED=NO", "CODE_SIGN_IDENTITY="]
     elif provisioning:
