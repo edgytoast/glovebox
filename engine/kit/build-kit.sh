@@ -10,6 +10,11 @@
 set -euo pipefail
 G=${0:A:h:h:h}; K=$G/klepton; SRC=${GLOVEBOX_DEPS:-$G/src}
 OUT=${1:-$G/build/kit}; OUT=${OUT:A}; VER=${KIT_VERSION:-$(git -C $G rev-parse --short HEAD)}
+# Klepton's Makefile hands these paths to the compiler unquoted (KL_PATHMAP below): a space in them can't work
+if [[ $G$SRC == *' '* ]]; then
+  print -r -- "[kit] the checkout's path has a space in it ($G): clone it somewhere without one, such as ~/glovebox" >&2
+  exit 1
+fi
 SDL3_TAG=release-3.4.16; SDL2C_TAG=release-2.32.72
 LUAJIT_REV=c6ffc141; FOSSILIZE_REV=556da9f
 mkdir -p $SRC
