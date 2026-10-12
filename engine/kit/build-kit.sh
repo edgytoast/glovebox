@@ -57,6 +57,8 @@ if [ ! -f $SRC/LuaJIT-xros/src/libluajit.a ]; then
     TARGET_FLAGS="-target arm64-apple-xros1.0 -isysroot $XR" TARGET_SYS=iOS \
     XCFLAGS="-DLUAJIT_ENABLE_GC64 -DLUAJIT_NO_UNWIND -DLUAJIT_DISABLE_JIT" BUILDMODE=static > /dev/null
 fi
+# Klepton includes luajit.h from the pristine tree, and LuaJIT only generates it when it builds
+[ -f $SRC/LuaJIT/src/luajit.h ] || cp $SRC/LuaJIT-xros/src/luajit.h $SRC/LuaJIT/src/luajit.h
 
 say "building Klepton (runtime, game add-on, klepton-ld, MoltenVK)"
 cd $K
