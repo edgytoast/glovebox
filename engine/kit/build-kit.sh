@@ -51,7 +51,8 @@ fi
 if [ ! -f $SRC/LuaJIT-xros/src/libluajit.a ]; then
   say "building LuaJIT (interpreter only) for visionOS"
   rm -rf $SRC/LuaJIT-xros; cp -R $SRC/LuaJIT $SRC/LuaJIT-xros
-  make -C $SRC/LuaJIT-xros -s clean > /dev/null
+  # the same TARGET_SYS as the build: as a Darwin target LuaJIT stops without MACOSX_DEPLOYMENT_TARGET
+  make -C $SRC/LuaJIT-xros -s TARGET_SYS=iOS clean > /dev/null
   make -C $SRC/LuaJIT-xros -s HOST_CC="clang -arch arm64" CROSS="" TARGET_CC=clang \
     TARGET_FLAGS="-target arm64-apple-xros1.0 -isysroot $XR" TARGET_SYS=iOS \
     XCFLAGS="-DLUAJIT_ENABLE_GC64 -DLUAJIT_NO_UNWIND -DLUAJIT_DISABLE_JIT" BUILDMODE=static > /dev/null
