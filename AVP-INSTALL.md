@@ -98,3 +98,7 @@ To update or renew (free accounts every 7 days), the Glovebox app shows **Renew*
 
 More in [docs/KNOWN-ISSUES.md](docs/KNOWN-ISSUES.md). For problems, press **Copy diagnostics** in the Glovebox app and
 [open an issue on their repository](https://github.com/glovebox-vr/glovebox/issues/new).
+
+## Support
+
+This fork keeps Half-Life: Alyx installable on Apple Vision Pro. It's maintained as part of the [AVP Ports Index](https://github.com/edgytoast/avp-ports-index), which tracks every port we can find and runs a safety check on each one. If this guide got you playing, you can [buy me a coffee](https://buymeacoffee.com/adminpz) to help keep it running.
